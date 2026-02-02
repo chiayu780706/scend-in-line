@@ -197,10 +197,10 @@
       targetAmount: 300000, // 目標金額（自己改）
       updatedAt: new Date().toISOString(), // 也可手動填 "2026-02-02 13:00"
       tiers: [
-        { key:"dad100k",  label:"10萬",  name:"帝國藍圖爸爸",   price:100000, perks:"核心贊助者身份、重大決策投票資格、專屬感謝名列（可匿名）。" },
-        { key:"angel20k", label:"2萬",   name:"天使輪投資人",   price:20000,  perks:"搶先體驗與專屬更新、集資達標後回饋加碼。" },
-        { key:"sales5k",  label:"5千",   name:"業務專員",       price:5000,   perks:"限定紀念品/卡牌（依你的實際回饋替換文字）。" },
-        { key:"citizen1k2", label:"1千2", name:"帝國藍圖子民",  price:1200,   perks:"入坑支持、解鎖更多內容更新與社群身份。" },
+        { key:"dad100k",  label:"5萬",  name:"帝國藍圖爸爸",   price:100000, perks:"參與品牌決策、享所有專案內容、帝國藍圖紀念品、享【天使投資人】內容。" },
+        { key:"angel20k", label:"2萬",   name:"天使投資人",   price:20000,  perks:"專屬腳色與1年保固、達標回饋加碼，享【品牌大使】內容。" },
+        { key:"sales5k",  label:"5千",   name:"品牌大使",       price:5000,   perks:"解鎖限定紀念腳色、享【帝國公民】內容。" },
+        { key:"citizen1k2", label:"1千2", name:"帝國公民",  price:1200,   perks:"故事集、新手教學/市場圖板" },
       ],
       currency: "TWD"
     };
@@ -208,9 +208,10 @@
     // 名單：你要顯示的格式，例如："10萬-帝國藍圖爸爸-徐XX"
     // tierKey 必須對到 CONFIG.tiers 的 key，金額會用 tier price 自動算
     const BACKERS = [
-      { tierKey:"dad100k",  display:"10萬-帝國藍圖爸爸-徐XX",  at:"2026-02-02T10:10:00+08:00" },
-      { tierKey:"sales5k",  display:"5千-業務專員-陳OO",       at:"2026-02-02T09:20:00+08:00" },
-      { tierKey:"citizen1k2", display:"1千2-帝國藍圖子民-林OO", at:"2026-02-01T18:05:00+08:00" },
+      { tierKey:"angel20k",  display:"2萬-帝國藍圖爸爸-徐XX",  at:"2026-02-02T10:10:00+08:00" },
+       //{ tierKey:"dad100k",  display:"10萬-帝國藍圖爸爸-徐XX",  at:"2026-02-02T10:10:00+08:00" },
+       //{ tierKey:"sales5k",  display:"5千-業務專員-陳OO",       at:"2026-02-02T09:20:00+08:00" },
+       //{ tierKey:"citizen1k2", display:"1千2-帝國藍圖子民-林OO", at:"2026-02-01T18:05:00+08:00" },
     ];
     // =================================================
 
@@ -293,4 +294,5 @@
   </script>
 </body>
 </html>
+
 
