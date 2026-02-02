@@ -24,10 +24,17 @@
     }
     a{color:inherit}
     .wrap{max-width:1100px; margin:0 auto; padding:28px 18px 60px;}
+
+    /* Header card */
     header{
-      display:flex; gap:16px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap;
-      padding:18px 18px; border:1px solid var(--line); background:rgba(17,24,39,.65); border-radius:18px;
+      border:1px solid var(--line);
+      background:rgba(17,24,39,.65);
+      border-radius:18px;
+      padding:18px;
       backdrop-filter: blur(10px);
+    }
+    .headerTop{
+      display:flex; gap:16px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap;
     }
     .brand h1{margin:0 0 6px; font-size:26px; letter-spacing:.5px}
     .brand p{margin:0; color:var(--muted); line-height:1.5}
@@ -37,23 +44,18 @@
       background:rgba(255,255,255,.03);
       color:var(--muted);
       font-size:13px;
+      white-space:nowrap;
     }
-    .grid{
-      display:grid; gap:14px; margin-top:14px;
-      grid-template-columns: 1.2fr .8fr;
-    }
-    @media (max-width: 900px){ .grid{grid-template-columns:1fr} }
 
-    .card{
-      border:1px solid var(--line);
-      background:rgba(17,24,39,.65);
-      border-radius:18px;
-      padding:16px;
-      backdrop-filter: blur(10px);
+    .headerProgress{
+      margin-top:14px;
+      border-top:1px solid var(--line);
+      padding-top:14px;
     }
-    .card h2{margin:0 0 10px; font-size:16px; letter-spacing:.4px}
-    .muted{color:var(--muted)}
     .row{display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between}
+    .small{font-size:12px}
+    .muted{color:var(--muted)}
+
     .kpi{
       display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:10px;
     }
@@ -63,6 +65,7 @@
       background:rgba(255,255,255,.03)
     }
     .kpi .num{font-size:20px; font-weight:700; margin-top:4px}
+
     .progress{
       margin-top:12px;
       height:14px; background:rgba(255,255,255,.06);
@@ -74,6 +77,51 @@
       border-radius:999px;
       transition: width .8s ease;
     }
+
+    .btnrow{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
+    button{
+      cursor:pointer;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:12px;
+      font-size:13px;
+    }
+    button:hover{background:rgba(255,255,255,.07)}
+    .note{margin-top:10px; color:var(--muted); font-size:12px; line-height:1.6}
+    code{background:rgba(0,0,0,.25); padding:2px 6px; border-radius:8px; border:1px solid var(--line)}
+
+    /* Main grid */
+    .grid{
+      display:grid; gap:14px; margin-top:14px;
+      grid-template-columns: 1.2fr .8fr;
+      align-items:start;
+    }
+    @media (max-width: 900px){ .grid{grid-template-columns:1fr} }
+
+    .card{
+      border:1px solid var(--line);
+      background:rgba(17,24,39,.65);
+      border-radius:18px;
+      padding:16px;
+      backdrop-filter: blur(10px);
+    }
+    .card h2{margin:0 0 10px; font-size:16px; letter-spacing:.4px}
+
+    /* Backer list */
+    .list{
+      margin-top:10px; border-top:1px solid var(--line);
+    }
+    .item{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding:10px 2px; border-bottom:1px solid var(--line);
+      font-size:13px;
+    }
+    .item .who{color:var(--text)}
+    .item .amt{color:var(--muted); white-space:nowrap}
+
+    /* Tiers */
     .tiers{
       display:grid; gap:10px;
       grid-template-columns: repeat(2, 1fr);
@@ -93,32 +141,8 @@
     }
     .tier h3{margin:8px 0 6px; font-size:15px}
     .tier p{margin:0; color:var(--muted); line-height:1.5; font-size:13px}
-    .list{
-      margin-top:10px; border-top:1px solid var(--line);
-    }
-    .item{
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-      padding:10px 2px; border-bottom:1px solid var(--line);
-      font-size:13px;
-    }
-    .item .who{color:var(--text)}
-    .item .amt{color:var(--muted); white-space:nowrap}
-    .small{font-size:12px}
-    .btnrow{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px}
-    button{
-      cursor:pointer;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.04);
-      color:var(--text);
-      padding:10px 12px;
-      border-radius:12px;
-      font-size:13px;
-    }
-    button:hover{background:rgba(255,255,255,.07)}
-    .note{margin-top:10px; color:var(--muted); font-size:12px; line-height:1.6}
-    code{background:rgba(0,0,0,.25); padding:2px 6px; border-radius:8px; border:1px solid var(--line)}
 
-    /* ===== tiers with images + ecpay button ===== */
+    /* Tier images + ecpay button */
     .tier .img{
       width:100%;
       aspect-ratio: 16 / 9;
@@ -134,9 +158,7 @@
       object-fit: cover;
       display:block;
     }
-    .tier .pay{
-      margin-top:10px;
-    }
+    .tier .pay{ margin-top:10px; }
     .tier .pay a{
       display:inline-flex;
       align-items:center;
@@ -155,19 +177,20 @@
 
 <body>
   <div class="wrap">
-    <header>
-      <div class="brand">
-        <h1>帝國藍圖｜集資頁</h1>
-        <p>最新集資進度、方案與名單。</p>
-      </div>
-      <div class="pill" id="lastUpdated">更新時間：—</div>
-    </header>
 
-    <div class="grid">
-      <!-- Left: Funding status -->
-      <section class="card">
+    <!-- TOP HEADER (Progress moved here) -->
+    <header>
+      <div class="headerTop">
+        <div class="brand">
+          <h1>帝國藍圖｜集資頁</h1>
+          <p>最新集資進度、方案與名單。</p>
+        </div>
+        <div class="pill" id="lastUpdated">更新時間：—</div>
+      </div>
+
+      <div class="headerProgress">
         <div class="row">
-          <h2>目前集資進度</h2>
+          <h2 style="margin:0; font-size:16px; letter-spacing:.4px;">目前集資進度</h2>
           <div class="pill small" id="percentPill">完成：0%</div>
         </div>
 
@@ -191,12 +214,25 @@
         </div>
 
         <div class="note">
-          這頁會<strong>自動從名單</strong>加總金額並計算百分比；你只要新增名單資料即可更新（名單可用匿名）。
+          這頁會<strong>自動從名單</strong>加總金額並計算百分比；名單可匿名（例：2萬-天使投資人-匿名A）。
         </div>
 
         <div class="btnrow">
           <button id="copyLinkBtn">複製此頁連結</button>
         </div>
+      </div>
+    </header>
+
+    <!-- MAIN -->
+    <div class="grid">
+      <!-- Left: Backers list (replaces old progress card) -->
+      <section class="card">
+        <div class="row">
+          <h2>已集資名單</h2>
+          <div class="pill small" id="listHint">格式：金額級距-方案名-匿名/姓名縮寫</div>
+        </div>
+        <div class="list" id="backerList"></div>
+        <div class="note">感謝以上贊助者</div>
       </section>
 
       <!-- Right: Plans -->
@@ -207,16 +243,6 @@
           每個方案可放圖片並直接連到綠界收款頁。<br/>
           圖片路徑可先用 <code>images/xxx.jpg</code>（把圖片放在同資料夾下的 images/）。
         </div>
-      </section>
-
-      <!-- Bottom: Backers list -->
-      <section class="card" style="grid-column: 1 / -1;">
-        <div class="row">
-          <h2>已集資名單</h2>
-          <div class="pill small" id="listHint">格式：金額級距-方案名-匿名/姓名縮寫（例：2萬-天使投資人-匿名A）</div>
-        </div>
-        <div class="list" id="backerList"></div>
-        <div class="note">感謝以上贊助者</div>
       </section>
     </div>
   </div>
@@ -276,9 +302,7 @@
       currency: "TWD"
     };
 
-    // ✅ 名單：支援匿名，例如「2萬-天使投資人-匿名A」
-    // tierKey 必須對到 CONFIG.tiers 的 key
-    // 金額會用 tier price 自動算
+    // ✅ 名單（支援匿名）
     const BACKERS = [
       { tierKey:"angel20k", display:"2萬-天使投資人-匿名A", at:"2026-02-02T10:10:00+08:00" },
       // { tierKey:"dad100k", display:"5萬-帝國藍圖爸爸-匿名B", at:"2026-02-02T09:20:00+08:00" },
@@ -295,24 +319,24 @@
 
     const tierMap = Object.fromEntries(CONFIG.tiers.map(t => [t.key, t]));
 
-    // Compute totals (free tier price=0 won't increase current)
+    // totals
     const validBackers = BACKERS.filter(b => tierMap[b.tierKey]);
     const current = validBackers.reduce((sum, b) => sum + (tierMap[b.tierKey].price || 0), 0);
     const percent = CONFIG.targetAmount > 0 ? Math.min(100, Math.round((current / CONFIG.targetAmount) * 100)) : 0;
 
-    // Render header meta
+    // header meta
     document.title = CONFIG.pageTitle;
     document.getElementById("lastUpdated").textContent =
       "更新時間：" + (CONFIG.updatedAt.includes("T") ? new Date(CONFIG.updatedAt).toLocaleString("zh-Hant-TW") : CONFIG.updatedAt);
 
-    // Render KPIs
+    // progress UI
     document.getElementById("currentAmount").textContent = fmtMoney(current);
     document.getElementById("targetAmount").textContent = fmtMoney(CONFIG.targetAmount);
     document.getElementById("backerCount").textContent = `${validBackers.length} 人`;
     document.getElementById("percentPill").textContent = `完成：${percent}%`;
     document.getElementById("progressBar").style.width = percent + "%";
 
-    // Render tiers (with image + ecpay link)
+    // tiers
     const tiersEl = document.getElementById("tiers");
     tiersEl.innerHTML = CONFIG.tiers.map(t => {
       const count = validBackers.filter(b => b.tierKey === t.key).length;
@@ -333,18 +357,15 @@
             <div class="badge">${t.label}</div>
             <div class="muted small">${count} 人支持</div>
           </div>
-
           ${imgBlock}
-
           <h3>${t.name}｜${priceText}</h3>
           <p>${t.perks}</p>
-
           ${payBlock}
         </div>
       `;
     }).join("");
 
-    // Render backer list (new to old)
+    // backer list (new to old)
     const listEl = document.getElementById("backerList");
     const sorted = [...validBackers].sort((a,b) => new Date(b.at) - new Date(a.at));
     listEl.innerHTML = sorted.map(b => {
@@ -358,7 +379,7 @@
       `;
     }).join("") || `<div class="item"><div class="muted">目前尚無名單</div></div>`;
 
-    // Copy helpers
+    // copy link
     const pageUrl = window.location.href;
     document.getElementById("copyLinkBtn").addEventListener("click", async () => {
       try{
