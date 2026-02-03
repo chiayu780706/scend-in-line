@@ -38,6 +38,12 @@
     }
     .brand h1{margin:0 0 6px; font-size:26px; letter-spacing:.5px}
     .brand p{margin:0; color:var(--muted); line-height:1.5}
+    .brand a{
+      color:#93c5fd;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
     .pill{
       display:inline-flex; align-items:center; gap:8px;
       border:1px solid var(--line); border-radius:999px; padding:8px 12px;
@@ -178,13 +184,15 @@
 <body>
   <div class="wrap">
 
-    <!-- TOP HEADER (Progress moved here) -->
+    <!-- TOP HEADER -->
     <header>
       <div class="headerTop">
         <div class="brand">
           <h1>帝國藍圖｜集資頁</h1>
-          <p>最新集資進度、請關注IG獲得最新消息:water780706。</p>
-          <payUrl>"https://www.instagram.com/water780706/"
+          <p>
+            最新集資進度、請關注 IG 獲得最新消息：
+            <a href="https://www.instagram.com/water780706/" target="_blank" rel="noopener">@water780706</a>
+          </p>
         </div>
         <div class="pill" id="lastUpdated">更新時間：—</div>
       </div>
@@ -226,7 +234,7 @@
 
     <!-- MAIN -->
     <div class="grid">
-      <!-- Left: Backers list (replaces old progress card) -->
+      <!-- Left: Backers list -->
       <section class="card">
         <div class="row">
           <h2>已集資名單</h2>
@@ -242,7 +250,7 @@
         <div class="tiers" id="tiers"></div>
         <div class="note">
           每個方案可放圖片並直接連到綠界收款頁。<br/>
-          圖片路徑可先用 <code>images/xxx.jpg</code>（把圖片放在同資料夾下的 images/）。
+          圖片請放在 <code>images/</code> 資料夾並使用對應檔名（50000 / 20000 / 5000 / 1800 / 0）。
         </div>
       </section>
     </div>
@@ -256,38 +264,38 @@
       tiers: [
         {
           key:"dad100k",
-          label:"5萬",
+          label:"50000",
           name:"帝國藍圖爸爸",
           price:50000,
           perks:"參與品牌決策、享所有專案內容、帝國藍圖紀念品、享【天使投資人】內容。",
-          imageUrl:"images/dad.jpg",
+          imageUrl:"images/50000.jpg",
           payUrl:"https://p.ecpay.com.tw/2CF4C59"
         },
         {
           key:"angel20k",
-          label:"2萬",
+          label:"20000",
           name:"天使投資人",
           price:20000,
           perks:"專屬腳色與1年保固、達標回饋加碼，享【品牌大使】內容。",
-          imageUrl:"images/angel.jpg",
+          imageUrl:"images/20000.jpg",
           payUrl:"https://p.ecpay.com.tw/317F673"
         },
         {
           key:"sales5k",
-          label:"5千",
+          label:"5000",
           name:"品牌大使",
           price:5000,
           perks:"解鎖限定紀念腳色、享【帝國公民】內容。",
-          imageUrl:"images/ambassador.jpg",
+          imageUrl:"images/5000.jpg",
           payUrl:"https://p.ecpay.com.tw/AB48643"
         },
         {
           key:"citizen1k2",
-          label:"1千2",
+          label:"1800",
           name:"帝國公民",
-          price:1200,
+          price:1800,
           perks:"故事集、新手教學/市場圖板",
-          imageUrl:"images/citizen.jpg",
+          imageUrl:"images/1800.jpg",
           payUrl:"https://p.ecpay.com.tw/F19BEFD"
         },
         {
@@ -296,18 +304,17 @@
           name:"自由贊助",
           price:0,
           perks:"想支持多少都可以，感謝你把帝國藍圖往前推一把。",
-          imageUrl:"images/free.jpg",
+          imageUrl:"images/0.jpg",
           payUrl:"https://p.ecpay.com.tw/C71ADCC"
         },
       ],
       currency: "TWD"
     };
 
-    // ✅ 名單（支援匿名）
     const BACKERS = [
       { tierKey:"angel20k", display:"2萬-天使投資人-匿名A", at:"2026-02-02T10:10:00+08:00" },
       // { tierKey:"dad100k", display:"5萬-帝國藍圖爸爸-匿名B", at:"2026-02-02T09:20:00+08:00" },
-      // { tierKey:"citizen1k2", display:"1千2-帝國公民-林OO", at:"2026-02-01T18:05:00+08:00" },
+      // { tierKey:"citizen1k2", display:"1800-帝國公民-林OO", at:"2026-02-01T18:05:00+08:00" },
     ];
 
     const fmtMoney = (n) => {
@@ -320,24 +327,20 @@
 
     const tierMap = Object.fromEntries(CONFIG.tiers.map(t => [t.key, t]));
 
-    // totals
     const validBackers = BACKERS.filter(b => tierMap[b.tierKey]);
     const current = validBackers.reduce((sum, b) => sum + (tierMap[b.tierKey].price || 0), 0);
     const percent = CONFIG.targetAmount > 0 ? Math.min(100, Math.round((current / CONFIG.targetAmount) * 100)) : 0;
 
-    // header meta
     document.title = CONFIG.pageTitle;
     document.getElementById("lastUpdated").textContent =
       "更新時間：" + (CONFIG.updatedAt.includes("T") ? new Date(CONFIG.updatedAt).toLocaleString("zh-Hant-TW") : CONFIG.updatedAt);
 
-    // progress UI
     document.getElementById("currentAmount").textContent = fmtMoney(current);
     document.getElementById("targetAmount").textContent = fmtMoney(CONFIG.targetAmount);
     document.getElementById("backerCount").textContent = `${validBackers.length} 人`;
     document.getElementById("percentPill").textContent = `完成：${percent}%`;
     document.getElementById("progressBar").style.width = percent + "%";
 
-    // tiers
     const tiersEl = document.getElementById("tiers");
     tiersEl.innerHTML = CONFIG.tiers.map(t => {
       const count = validBackers.filter(b => b.tierKey === t.key).length;
@@ -366,7 +369,6 @@
       `;
     }).join("");
 
-    // backer list (new to old)
     const listEl = document.getElementById("backerList");
     const sorted = [...validBackers].sort((a,b) => new Date(b.at) - new Date(a.at));
     listEl.innerHTML = sorted.map(b => {
@@ -380,7 +382,6 @@
       `;
     }).join("") || `<div class="item"><div class="muted">目前尚無名單</div></div>`;
 
-    // copy link
     const pageUrl = window.location.href;
     document.getElementById("copyLinkBtn").addEventListener("click", async () => {
       try{
@@ -393,4 +394,3 @@
   </script>
 </body>
 </html>
-
